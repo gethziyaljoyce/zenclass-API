@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,21 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 
-   
+
 </head>
+
 <body>
     <script src="style.js"></script>
-    <input type="text" id="myInput"  placeholder="Enter your name">
-    <input type="text" id="myInput1"  placeholder="Enter your pic">
-    
-   
-    <button onclick="addData()">Add User</button>
+    <input type="text" id="myInput" placeholder="Enter your name">
+    <input type="text" id="myInput1" placeholder="Enter your pic">
+    <button onclick="addData()">Add User</button><br><br>
+    <input type="text" id="myEditInput" placeholder="Enter your name">
+    <input type="text" id="myEditInput1" placeholder="Enter your pic">
+    <input type="hidden" id="myEditInput2" >
+    <button onclick="editedNewData()">Edit User</button>
     <section class="user-data">
 
     </section>
 </body>
+
 </html>

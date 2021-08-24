@@ -18,6 +18,7 @@ function createData({ avatar, name, createdAt, id }) {
     <h3>${name}</h3>
     <p>${new Date(createdAt).toDateString()}</p>
     <button onclick="deleteData(${id})">Delete</button>
+    <button onclick="editData(${id})">Edit</button>
     </div>
     </div>
     `;
@@ -33,40 +34,50 @@ async function deleteData(id) {
     getData();
 }
 
-// let a=function userName(event){
-//     const uname=event.target.value;
-//     return uname;
-// }
-// let a = function myFunction() {
-//     var x = document.getElementById("myInput").value;
-//     return x;
-// }
-
-// let b = function myPic() {
-//     var y = document.getElementById("myInput1").value;
-//     return y;
-// }
-// let b=function userPic(event){
-//    const upic=event.target.value;
-//   return upic;
-// }
 
 async function addData() {
     var a = document.getElementById("myInput").value;
     var b = document.getElementById("myInput1").value;
-    fetch("https://611f264a9771bf001785c738.mockapi.io/users", {
+    await fetch("https://611f264a9771bf001785c738.mockapi.io/users", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name: `${a}`,
-            avatar: `${b}`
-            // craetedAt : new Date().toISOString()
+            name: a,
+            avatar: b,
+            craetedAt: new Date().toISOString()
         })
     })
-        .then((data) => data.json())
-        .then(user => getData());
+    getData();
 }
 
 
+async function editData(id) {
+    const data = await fetch("https://611f264a9771bf001785c738.mockapi.io/users/" + id, { method: "GET" });
+    const users = await data.json();
+    console.log(users.name);
+    console.log(users.avatar);
+    console.log(users.id);
+    document.getElementById("myEditInput").value=users.name;
+    document.getElementById("myEditInput1").value=users.avatar;
+    document.getElementById("myEditInput2").value=users.id;
+}
+async function editedNewData(){
+    var a = document.getElementById("myEditInput").value;
+    var b = document.getElementById("myEditInput1").value;
+    var id = document.getElementById("myEditInput2").value;
+    await fetch("https://611f264a9771bf001785c738.mockapi.io/users/" +id, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            name: a,
+            avatar: b,
+            craetedAt: new Date().toISOString()
+        })
+    })
+    getData();
+
+}
